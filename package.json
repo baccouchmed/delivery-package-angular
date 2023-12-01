@@ -9,7 +9,10 @@
     "test": "ng test",
     "lint": "npm run lint:eslint",
     "lint:fix": "ng lint --fix",
-    "lint:eslint": "ng lint"
+    "lint:eslint": "ng lint",
+    "validate-branch": "validate-branch-name",
+    "commit-message-validator": "commit-message-validator",
+    "prepare": "husky install"
   },
   "husky": {
     "hooks": {
