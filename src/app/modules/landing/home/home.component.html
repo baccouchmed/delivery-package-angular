@@ -1,0 +1,183 @@
+<div class="flex flex-col md:flex-row items-center justify-center w-full md:h-full">
+  <div class="w-full md:w-1/2 md:h-full">
+    <div class="flex flex-col flex-auto min-w-0">
+      <!-- Header -->
+      <div
+        class="relative pt-8 pb-28 px-4 sm:pb-48 sm:px-16 overflow-hidden bg-gray-800 dark:bg-gray-900 dark"
+      >
+        <!-- Background - @formatter:off -->
+        <!-- Rings -->
+        <svg
+          class="absolute inset-0 pointer-events-none"
+          viewBox="0 0 960 540"
+          width="100%"
+          height="100%"
+          preserveAspectRatio="xMidYMax slice"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g class="text-gray-700 opacity-25" fill="none" stroke="currentColor" stroke-width="100">
+            <circle r="234" cx="196" cy="23"></circle>
+            <circle r="234" cx="790" cy="491"></circle>
+          </g>
+        </svg>
+        <!-- @formatter:on -->
+        <div class="z-10 relative flex flex-col items-center">
+          <div class="rounded-full absolute top-0">
+            <img class="w-90 h-90" src="assets/images/logo/veto.png" alt="tic-nova" />
+          </div>
+          <div
+            class="mt-72 text-4xl sm:text-7xl font-extrabold tracking-tight leading-tight text-center"
+          >
+            VETO NOVA
+          </div>
+          <div class="mt-3 sm:text-2xl text-center tracking-tight text-secondary">
+            Votre vétérinaire, le meilleur conseil santé et nutrition pour votre animal. À distance,
+            continuez de prendre soin de votre animal !
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col items-center pb-6 px-6 sm:pb-10 sm:px-10">
+        <!-- Cards -->
+        <div
+          class="grid grid-cols-1 md:grid-cols-3 gap-y-8 md:gap-y-0 md:gap-x-6 w-full max-w-sm md:max-w-4xl -mt-16 sm:-mt-24"
+        >
+          <!-- docs -->
+          <div
+            class="relative flex flex-col rounded-2xl shadow hover:shadow-lg overflow-hidden bg-card transition-shadow ease-in-out duration-150"
+          >
+            <div class="flex flex-col flex-auto items-center p-8 text-center">
+              <div class="text-2xl font-semibold">Documentations</div>
+              <div class="md:max-w-40 mt-1 text-secondary">
+                Votre guide d'utilisation de notre produits
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-center py-4 px-8 text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-transparent dark:border-t"
+            >
+              <a class="flex items-center" [routerLink]="['/coming-soon']">
+                <span class="absolute inset-0"></span>
+                <span class="font-medium">Guide</span>
+                <mat-icon
+                  class="ml-2 icon-size-5 text-current"
+                  [svgIcon]="'heroicons_solid:arrow-narrow-right'"
+                ></mat-icon>
+              </a>
+            </div>
+          </div>
+          <!-- sign in -->
+          <div
+            class="relative flex flex-col rounded-2xl shadow hover:shadow-lg overflow-hidden bg-card transition-shadow ease-in-out duration-150"
+          >
+            <div class="flex flex-col flex-auto items-center p-8 text-center">
+              <div class="text-2xl font-semibold">
+                {{ authenticated ? 'Dashboard' : 'Se connecter' }}
+              </div>
+              <div class="md:max-w-40 mt-1 text-secondary">
+                {{ authenticated ? 'Retour à la dashboard' : 'Vous avez déja un compte' }}
+              </div>
+            </div>
+            <div
+              class="flex items-center justify-center py-4 px-8 text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-transparent dark:border-t"
+            >
+              <a *ngIf="!authenticated" class="flex items-center" [routerLink]="['/sign-in']">
+                <span class="absolute inset-0"></span>
+                <span class="font-medium">Connexion</span>
+                <mat-icon
+                  class="ml-2 icon-size-5 text-current"
+                  [svgIcon]="'heroicons_solid:arrow-narrow-right'"
+                ></mat-icon>
+              </a>
+              <a *ngIf="authenticated" class="flex items-center" [routerLink]="['/']">
+                <span class="absolute inset-0"></span>
+                <span class="font-medium">Dashboard</span>
+                <mat-icon
+                  class="ml-2 icon-size-5 text-current"
+                  [svgIcon]="'heroicons_solid:arrow-narrow-right'"
+                ></mat-icon>
+              </a>
+            </div>
+          </div>
+          <!-- sign up -->
+          <div
+            *ngIf="!authenticated"
+            class="relative flex flex-col rounded-2xl shadow hover:shadow-lg overflow-hidden bg-card transition-shadow ease-in-out duration-150"
+          >
+            <div class="flex flex-col flex-auto items-center p-8 text-center">
+              <div class="text-2xl font-semibold">S'abonner</div>
+              <div class="md:max-w-40 mt-1 text-secondary">tarifs et offres des abonnements</div>
+            </div>
+            <div
+              class="flex items-center justify-center py-4 px-8 text-primary-500 dark:text-primary-400 bg-gray-50 dark:bg-transparent dark:border-t"
+            >
+              <a class="flex items-center" [routerLink]="['/sign-up']">
+                <span class="absolute inset-0"></span>
+                <span class="font-medium">Abonnements</span>
+                <mat-icon
+                  class="ml-2 icon-size-5 text-current"
+                  [svgIcon]="'heroicons_solid:arrow-narrow-right'"
+                ></mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full md:w-1/2 h-screen md:h-full relative flex justify-center items-center">
+    <div class="map" id="map" class="match-parent"></div>
+    <div
+      class="absolute top-0 w-full h-full bg-black bg-opacity-30 flex justify-center items-center"
+      *ngIf="selectedItem"
+    >
+      <app-fuse-card class="flex flex-col items-center max-w-80 w-full p-8 pb-6 filter-info">
+        <div class="flex justify-end w-full">
+          <mat-icon
+            (click)="selectedItem = null"
+            class="icon-size-8 mr-1 cursor-pointer z-99 bg-white rounded-full"
+            [svgIcon]="'heroicons_solid:x'"
+          ></mat-icon>
+        </div>
+        <img
+          *ngIf="selectedItem.building"
+          class="w-full h-60 mb-1 absolute top-0"
+          [src]="urlBuilding + selectedItem.building"
+          alt="Card cover image"
+        />
+        <div
+          class="flex justify-center items-center w-full h-60 mb-1 absolute top-0 bg-gray-400 text-blue-400"
+          *ngIf="!selectedItem.building"
+        >
+          <mat-icon class="w-40 h-40 text-white" [svgIcon]="'heroicons_solid:home'"></mat-icon>
+        </div>
+        <div class="text-2xl font-semibold leading-tight mt-50">{{ selectedItem.name }}</div>
+        <hr class="w-full border-t my-6" />
+        <div class="flex flex-col">
+          <div class="flex items-center">
+            <mat-icon
+              class="icon-size-5 mr-3"
+              [svgIcon]="'heroicons_solid:location-marker'"
+            ></mat-icon>
+            <span class="leading-none">{{ selectedItem.address }}</span>
+          </div>
+          <div class="flex items-center mt-4">
+            <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:mail'"></mat-icon>
+            <span class="leading-none">{{ selectedItem.email }}</span>
+          </div>
+          <div class="flex items-center mt-4">
+            <mat-icon class="icon-size-5 mr-3" [svgIcon]="'heroicons_solid:phone'"></mat-icon>
+            <span class="leading-none">{{ selectedItem.phone }}</span>
+          </div>
+        </div>
+        <a class="px-6 mt-8" mat-flat-button [color]="'primary'" [routerLink]="['./']">
+          Contactez
+        </a>
+      </app-fuse-card>
+    </div>
+    <div class="absolute bottom-4 right-4 flex justify-end items-center md:hidden w-full">
+      <button mat-fab class="bg-white bg-opacity-30" type="button" (click)="gotoTop()">
+        <mat-icon svgIcon="heroicons_outline:chevron-double-up"></mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

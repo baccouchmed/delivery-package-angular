@@ -1,0 +1,92 @@
+<!-- Navigation -->
+<app-fuse-vertical-navigation
+  class="dark bg-black print:hidden"
+  [mode]="isScreenSmall ? 'over' : 'side'"
+  [name]="'mainNavigation'"
+  [navigation]="navigation"
+  [opened]="!isScreenSmall"
+>
+  <!-- Navigation header hook -->
+  <ng-container fuseVerticalNavigationContentHeader>
+    <!-- Logo -->
+
+    <div class="flex w-full justify-center items-center mt-4">
+      <img class="w-11/12" *ngIf="isGenerationExpress" src="assets/images/logos/logo2_orange.png" />
+      <img
+        class="w-11/12"
+        *ngIf="!isGenerationExpress"
+        src="assets/images/logo/logo-delivery.png"
+      />
+    </div>
+  </ng-container>
+  <!-- Navigation footer hook -->
+  <ng-container fuseVerticalNavigationContentFooter>
+    <div
+      class="flex flex-0 items-center justify-center h-16 pr-6 pl-2 mt-8 mb-2 opacity-50 mx-auto"
+    ></div>
+  </ng-container>
+</app-fuse-vertical-navigation>
+
+<!-- Wrapper -->
+<div class="flex flex-col flex-auto w-full min-w-0">
+  <!-- Header -->
+  <div
+    class="relative flex flex-0 items-center w-full h-16 px-4 md:px-6 z-49 shadow dark:shadow-none dark:border-b print:hidden"
+    [ngClass]="{
+      'bg-header': isGenerationExpress,
+      'bg-header-tic': !isGenerationExpress
+    }"
+  >
+    <!-- Navigation toggle button -->
+    <button mat-icon-button (click)="toggleNavigation('mainNavigation')">
+      <mat-icon [svgIcon]="'heroicons_outline:menu'"></mat-icon>
+    </button>
+
+    <xng-breadcrumb [separator]="separatorTemplate">
+      <ng-container *xngBreadcrumbItem="let breadcrumb; let first = first; let last = last">
+        <mat-icon class="text-blue-500" *ngIf="breadcrumb === 'Home'">home</mat-icon>
+        <ng-container *ngIf="!first && !last"
+          ><span class="font-semibold text-blue-400 capitalize">{{
+            breadcrumb | transloco
+          }}</span></ng-container
+        >
+        <ng-container *ngIf="last"
+          ><span class="font-weight-500 text-white capitalize">{{
+            breadcrumb | transloco
+          }}</span></ng-container
+        >
+      </ng-container>
+    </xng-breadcrumb>
+    <ng-template #separatorTemplate>
+      <mat-icon svgIcon="heroicons_outline:chevron-right"></mat-icon>
+    </ng-template>
+    <!-- Components -->
+    <div class="flex items-center pl-2 ml-auto space-x-0.5 sm:space-x-2">
+      <span
+        class="text-blue-400 font-bold bg-black bg-opacity-50 p-2 rounded-xl hidden sm:flex"
+        *ngIf="user"
+        >{{ user.name }}</span
+      >
+      <button class="mr-4" mat-icon-button (click)="logout()">
+        <mat-icon
+          class="icon-size-5 text-red-600"
+          [svgIcon]="'heroicons_outline:logout'"
+        ></mat-icon>
+      </button>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="flex flex-col flex-auto">
+    <!-- *ngIf="true" hack is required here for router-outlet to work correctly.
+             Otherwise, layout changes won't be registered and the view won't be updated! -->
+    <router-outlet *ngIf="true"></router-outlet>
+  </div>
+
+  <!-- Footer -->
+  <!--<div class="relative flex flex-0 items-center justify-start w-full h-14 px-4 md:px-6 z-49 border-t bg-card dark:bg-transparent print:hidden">
+        <span class="font-medium text-secondary">Fuse &copy; {{currentYear}}</span>
+    </div>-->
+</div>
+
+<!-- Quick chat -->

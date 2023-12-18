@@ -1,0 +1,52 @@
+<div class="flex flex-col max-w-150 md:min-w-120 max-h-screen -m-6">
+  <!-- Header -->
+  <div
+    class="flex flex-0 items-center justify-between h-16 pr-3 sm:pr-5 pl-6 sm:pl-8 bg-primary text-on-primary"
+  >
+    <div class="text-lg font-medium">{{ 'Position sur carte' }}</div>
+  </div>
+  <div class="w-full h-96">
+    <div class="map" id="map" class="match-parent"></div>
+  </div>
+  <form class="w-full" #myForm="ngForm" ngForm="ngForm">
+    <!-- Loader -->
+    <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+    <!-- Main -->
+    <div class="flex flex-1 flex-col flex-auto overflow-hidden sm:overflow-y-auto">
+      <div class="flex flex-col mb-6 w-full">
+        <div class="grid sm:grid-cols-4 gap-6 p-3">
+          <!-- longitude -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+              <mat-label>{{ 'Longitude' | transloco }}</mat-label>
+              <input [(ngModel)]="longitude" disabled matInput type="number" name="longitude" />
+            </mat-form-field>
+          </div>
+          <!-- latitude -->
+          <div class="sm:col-span-2">
+            <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+              <mat-label>{{ 'Latitude' }}</mat-label>
+              <input [(ngModel)]="latitude" disabled matInput type="number" name="latitude" />
+            </mat-form-field>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-end mt-3 mr-3 mb-4">
+      <!-- Discard -->
+      <button class="ml-auto sm:ml-0 ml-4" type="button" mat-stroked-button (click)="discard()">
+        {{ 'annuler' }}
+      </button>
+      <!-- Send -->
+      <button
+        class="order-first sm:order-last ml-4"
+        mat-flat-button
+        type="submit"
+        [color]="'primary'"
+        (click)="confirm()"
+      >
+        {{ 'confirmer' | transloco }}
+      </button>
+    </div>
+  </form>
+</div>
