@@ -1,0 +1,41 @@
+import { Company } from './company';
+import { User } from './user';
+import { Country, Delegation, Governorate, Municipality } from './country';
+import { StatusPackage } from '../enums/status-package';
+
+export class Package {
+  id?: string;
+  _id?: string;
+  companyId?: Company;
+  reference?: string;
+  providerId?: User;
+  pickUpBy?: User;
+  clientName?: string;
+  clientPhone?: string;
+  clientPhoneTwo?: string;
+  clientEmail?: string;
+  countryId?: Country;
+  governorateId?: Governorate;
+  municipalityId?: Municipality;
+  delegationId?: Delegation;
+  address?: string;
+  longitude?: string;
+  latitude?: string;
+  designation?: string;
+  designationLines?: number;
+  remark?: string;
+  pickUpDate?: string;
+  deliveryDate?: string;
+  totalHt?: number;
+  tva?: number;
+  totalTtc?: number;
+  qrPath?: string;
+  createdAt?: string;
+  status?: StatusPackage;
+  location?: string;
+  stockedDate?: string;
+  stockedBy?: User;
+  deliveryBy?: User;
+  returnedDate?: string;
+  returnedBy?: string;
+}

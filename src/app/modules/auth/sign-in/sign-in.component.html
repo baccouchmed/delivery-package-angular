@@ -1,0 +1,110 @@
+<div class="flex flex-col flex-auto items-center xs:justify-center min-w-0 md:p-8 bg-card">
+  <div class="flex md:w-full md:max-w-6xl xs:rounded-2xl xs:shadow overflow-hidden xs:bg-card">
+    <div
+      class="relative bg-ticgeek-1 hidden md:flex flex-col items-stretch justify-end h-full p-2 lg:px-10 overflow-hidden bg-gray-800 dark:border-r"
+    >
+      <div class="z-999 flex flex-row w-full p-4 justify-end">
+        <div
+          class="text-lg p-4 text-white font-bold rounded-br-2xl rounded-tr-2xl w-full tracking-tight leading-5 bg-black bg-opacity-60 rounded-bl-2xl rounded-tl-2xl"
+        >
+          {{
+            'What started as an ambitious ideas is now the leading local delivery company.Generation Express is present now and is on a mission to deliver anything, straight to customers doors.'
+              | transloco
+          }}
+        </div>
+      </div>
+    </div>
+    <div class="w-full xs:w-auto py-8 px-4 sm:p-12 md:p-16 bg-tic-geek">
+      <div class="w-full max-w-80 sm:w-80 mx-auto sm:mx-0">
+        <!-- Logo -->
+        <div class="w-80 mx-auto">
+          <img src="assets/images/logo/logo-delivery.png" alt="logo" />
+        </div>
+        <!-- Sign in form -->
+        <form class="w-full mt-8" #myForm="ngForm" ngForm="ngForm">
+          <!-- Application -->
+          <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+            <mat-label class="capitalize">{{ 'application' | transloco }}</mat-label>
+            <mat-select
+              placeholder="select type"
+              (selectionChange)="application = selectValueCurrency.value"
+              [value]="application"
+              [(ngModel)]="application"
+              name="application"
+              #selectValueCurrency
+              required
+            >
+              <mat-select-trigger>
+                <div class="font-medium items-center flex flex-row" *ngIf="application">
+                  <span class="block">
+                    {{ application | refList : listApplications }}
+                  </span>
+                </div>
+              </mat-select-trigger>
+              <mat-option *ngFor="let item of listApplications" [value]="item.key">
+                <div class="font-medium items-center flex flex-row">
+                  <span class="block">
+                    {{ item.value }}
+                  </span>
+                </div>
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-error
+            *ngIf="
+              myForm.controls['application'] &&
+              (myForm.controls['application'].dirty || myForm.submitted) &&
+              myForm.controls['application'].hasError('required')
+            "
+          >
+            {{ 'This field is required' | transloco }}
+          </mat-error>
+          <!-- Email field -->
+          <mat-form-field class="fuse-mat-no-subscript fuse-mat-emphasized-affix w-full">
+            <mat-label class="capitalize">{{ 'email' | transloco }}</mat-label>
+            <input [(ngModel)]="email" matInput name="email" type="email" />
+          </mat-form-field>
+
+          <!-- Password field -->
+          <mat-form-field class="w-full">
+            <mat-label class="text-black">{{ 'Password' | transloco }}</mat-label>
+            <input name="password" matInput type="password" [(ngModel)]="password" #passwordField />
+            <button
+              mat-icon-button
+              type="button"
+              (click)="
+                passwordField.type === 'password'
+                  ? (passwordField.type = 'text')
+                  : (passwordField.type = 'password')
+              "
+              matSuffix
+            >
+              <mat-icon
+                class="icon-size-5"
+                *ngIf="passwordField.type === 'password'"
+                [svgIcon]="'heroicons_solid:eye'"
+              ></mat-icon>
+              <mat-icon
+                class="icon-size-5"
+                *ngIf="passwordField.type === 'text'"
+                [svgIcon]="'heroicons_solid:eye-off'"
+              ></mat-icon>
+            </button>
+            <mat-error> {{ 'Password is required' | transloco }} </mat-error>
+          </mat-form-field>
+
+          <!-- Submit button -->
+          <button
+            class="fuse-mat-button-large w-full mt-6 bg-button-auth-tic-geek"
+            mat-flat-button
+            (click)="signIn()"
+          >
+            <span class="text-white font-bold text-2xl">
+              {{ 'Sign in' | transloco }}
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
